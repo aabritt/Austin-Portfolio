@@ -1,1 +1,131 @@
+/* Example complete CSS with dark blue theme, cream text, animations, mobile responsiveness */
 
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0e1a2b;
+  color: #f5f5dc;
+  line-height: 1.6;
+  animation: fadeInBody 1s ease-in;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'><path fill='none' stroke='%239eb3c2' stroke-width='0.5' d='M0 50 Q50 0 100 50 T200 50 T300 50 T400 50 T500 50' /></svg>") repeat-x;
+  background-size: cover;
+  opacity: 0.03;
+  z-index: -1;
+  animation: moveBackground 60s linear infinite;
+}
+
+@keyframes fadeInBody { from { opacity: 0; } to { opacity: 1; } }
+@keyframes moveBackground { 0% { background-position: 0 0; } 100% { background-position: -1000px 0; } }
+
+header {
+  text-align: center;
+  padding: 20px;
+}
+
+.subtitle {
+  font-size: 1.1em;
+  color: #dcdccc;
+}
+
+.intro {
+  text-align: center;
+  max-width: 600px;
+  margin: auto;
+  padding: 10px 20px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  text-align: center;
+  padding: 15px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s, box-shadow 0.3s;
+  opacity: 0;
+}
+
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.card img {
+  width: 50px;
+  margin-bottom: 8px;
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(255,255,255,0.1);
+}
+
+section {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.back-btn {
+  display: inline-block;
+  margin: 20px;
+  color: #f5f5dc;
+  text-decoration: none;
+}
+
+#loader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: #0e1a2b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  width: 40px; height: 40px;
+  border: 4px solid #9eb3c2;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .cards { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+}
